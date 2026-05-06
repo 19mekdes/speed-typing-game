@@ -1,0 +1,398 @@
+/* globals.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Fira Code', 'Courier New', monospace;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Game Container Styles */
+.game-container {
+  max-width: 1200px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  margin: 20px auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 2.5em;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+}
+
+.difficulty-selector {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.difficulty-selector label {
+  color: #fff;
+  font-weight: bold;
+}
+
+select {
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: none;
+  background: #0f3460;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: monospace;
+  transition: all 0.3s ease;
+}
+
+select:hover {
+  background: #1a4a7a;
+  transform: scale(1.02);
+}
+
+select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.stats {
+  display: flex;
+  gap: 25px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #00ff88;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button {
+  padding: 10px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: monospace;
+}
+
+button:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+#startBtn, button:has(.start) {
+  background: linear-gradient(135deg, #00ff88, #00cc66);
+  color: #1a1a2e;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.text-display {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  padding: 25px;
+  margin: 20px 0;
+  min-height: 180px;
+  border: 2px solid #0f3460;
+  transition: all 0.3s ease;
+}
+
+.text-display:hover {
+  border-color: #00ff88;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+.reference-text {
+  font-size: 24px;
+  line-height: 1.5;
+  word-break: break-word;
+  font-family: 'Fira Code', 'Courier New', monospace;
+}
+
+.char {
+  display: inline;
+  font-size: 24px;
+  transition: all 0.05s linear;
+}
+
+.char.correct {
+  color: #00ff88;
+  text-shadow: 0 0 3px #00ff88;
+}
+
+.char.incorrect {
+  color: #ff4444;
+  background: rgba(255, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.char.current {
+  background: #ffff00;
+  color: #000;
+  border-radius: 3px;
+  padding: 0 2px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0.7;
+  }
+}
+
+.input-area {
+  margin: 20px 0;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 15px;
+  font-size: 20px;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #0f3460;
+  border-radius: 15px;
+  color: white;
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #00ff88;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.results {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  text-align: center;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.results h3 {
+  color: #00ff88;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.results p {
+  color: #fff;
+  font-size: 1.1em;
+  line-height: 1.8;
+}
+
+.accuracy-bar {
+  width: 100%;
+  height: 10px;
+  background: #333;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.accuracy-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff88, #00cc66);
+  transition: width 0.3s ease;
+  border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .game-container {
+    padding: 15px;
+    margin: 10px;
+  }
+  
+  .reference-text, .char {
+    font-size: 18px;
+  }
+  
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .difficulty-selector {
+    justify-content: center;
+  }
+  
+  .stats {
+    justify-content: center;
+  }
+  
+  h1 {
+    font-size: 1.8em;
+  }
+  
+  .stat-value {
+    font-size: 24px;
+  }
+  
+  textarea {
+    font-size: 16px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reference-text, .char {
+    font-size: 14px;
+  }
+  
+  button {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+  
+  .stats {
+    gap: 15px;
+  }
+  
+  .stat-value {
+    font-size: 20px;
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00ff88;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00cc66;
+}
+
+/* Loading Animation */
+.loading {
+  text-align: center;
+  color: #fff;
+  font-size: 1.2em;
+  margin-top: 50px;
+}
+
+/* Tooltip Styles */
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+[data-tooltip]:before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background: #333;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 5px;
+  white-space: nowrap;
+  display: none;
+  z-index: 10;
+}
+
+[data-tooltip]:hover:before {
+  display: block;
+}
