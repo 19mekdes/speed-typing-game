@@ -11,7 +11,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Game Container Styles */
 .game-container {
   max-width: 1200px;
   width: 100%;
@@ -286,7 +285,7 @@ textarea:disabled {
   border-radius: 5px;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .game-container {
     padding: 15px;
