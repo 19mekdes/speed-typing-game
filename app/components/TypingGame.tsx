@@ -5,7 +5,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-// Text databases for different difficulties
+
 const texts = {
   easy: [
     "The cat sat on the mat and looked at the sun. It was a warm and happy day for the little cat.",
@@ -30,7 +30,7 @@ const texts = {
   ]
 };
 
-// Word weights for bonus scoring (simple words weigh less, difficult words weigh more)
+
 const simpleWords = new Set(['a', 'an', 'the', 'and', 'of', 'to', 'in', 'for', 'on', 'with', 'at', 'by', 'is', 'was', 'are']);
 const mediumWords = new Set(['but', 'from', 'have', 'this', 'that', 'they', 'will', 'their', 'what', 'about']);
 
@@ -133,7 +133,7 @@ export default function TypingGame() {
     `);
     setShowResults(true);
     
-    // Save to localStorage (Extra Challenge)
+    
     const testResult = {
       timestamp: Date.now(),
       wpm: finalWPM,
@@ -195,7 +195,7 @@ export default function TypingGame() {
     }, 1000);
   };
 
-  // Handle input change
+  
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (!isActive) return;
     const value = e.target.value;
@@ -209,7 +209,7 @@ export default function TypingGame() {
     }
   };
 
-  // Render highlighted text with character-by-character coloring
+  
   const renderHighlightedText = () => {
     if (!currentText) return null;
     
