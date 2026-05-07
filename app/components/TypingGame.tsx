@@ -269,7 +269,7 @@ export default function TypingGame() {
 
   return (
     <div className="game-container">
-      <h1>⚡ SPEED TYPING ARENA ⚡</h1>
+      <h1>⚡ SPEED TYPING GAME ⚡</h1>
       
       <div className="controls">
         <div className="difficulty-selector">
