@@ -301,7 +301,7 @@ export default function TypingGame() {
         </div>
         
         <button onClick={startGame} disabled={isActive}>
-          🚀 START TEST
+           START TEST
         </button>
       </div>
       
