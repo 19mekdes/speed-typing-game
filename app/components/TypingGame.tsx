@@ -229,8 +229,7 @@ export default function TypingGame() {
     });
   };
 
-  // Load history from localStorage on mount
-  useEffect(() => {
+ useEffect(() => {
     try {
       const storedHistory = localStorage.getItem('typingHistory');
       if (storedHistory) {
@@ -255,7 +254,6 @@ export default function TypingGame() {
     }
   }, [difficulty]);
 
-  // Cleanup timer on unmount
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
