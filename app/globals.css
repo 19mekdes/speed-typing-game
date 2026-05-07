@@ -361,7 +361,6 @@ textarea:disabled {
   background: #00cc66;
 }
 
-/* Loading Animation */
 .loading {
   text-align: center;
   color: #fff;
@@ -369,7 +368,6 @@ textarea:disabled {
   margin-top: 50px;
 }
 
-/* Tooltip Styles */
 [data-tooltip] {
   position: relative;
   cursor: help;
