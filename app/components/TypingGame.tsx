@@ -62,7 +62,7 @@ export default function TypingGame() {
       let weight = 1;
       if(simpleWords.has(word)) weight = 0.6;
       else if(mediumWords.has(word)) weight = 0.8;
-      else weight = 1.2;  // difficult words weigh more
+      else weight = 1.2;  
       
       totalWeight += weight;
       if(typedWords[i] === word) earnedWeight += weight;
@@ -92,7 +92,7 @@ export default function TypingGame() {
     const elapsedMinutes = (60 - timeLeft) / 60;
     let standardWPM = 0;
     if(elapsedMinutes > 0 && correctCount > 0) {
-      const wordsTyped = correctCount / 5; // 5 characters = 1 word
+      const wordsTyped = correctCount / 5; 
       standardWPM = Math.floor(wordsTyped / elapsedMinutes);
     }
     
