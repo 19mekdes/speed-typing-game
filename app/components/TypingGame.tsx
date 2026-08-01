@@ -46,7 +46,7 @@ export default function TypingGame() {
   const [finalStats, setFinalStats] = useState('');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [history, setHistory] = useState<any[]>([]);
-  
+
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -56,20 +56,20 @@ export default function TypingGame() {
     const typedWords = typedText.toLowerCase().trim().split(/\s+/);
     let totalWeight = 0;
     let earnedWeight = 0;
-    
-    for(let i = 0; i < originalWords.length && i < typedWords.length; i++) {
+
+    for (let i = 0; i < originalWords.length && i < typedWords.length; i++) {
       const word = originalWords[i];
       let weight = 1;
-      if(simpleWords.has(word)) weight = 0.6;
-      else if(mediumWords.has(word)) weight = 0.8;
-      else weight = 1.2;  
-      
+      if (simpleWords.has(word)) weight = 0.6;
+      else if (mediumWords.has(word)) weight = 0.8;
+      else weight = 1.2;
+
       totalWeight += weight;
-      if(typedWords[i] === word) earnedWeight += weight;
+      if (typedWords[i] === word) earnedWeight += weight;
     }
-    
+
     const elapsedMinutes = (60 - timeLeft) / 60;
-    if(elapsedMinutes <= 0) return 0;
+    if (elapsedMinutes <= 0) return 0;
     return Math.floor(earnedWeight / elapsedMinutes);
   };
 
@@ -83,23 +83,23 @@ export default function TypingGame() {
   // Update WPM and accuracy in real-time
   const updateStats = () => {
     if (!isActive) return;
-    
+
     let correctCount = 0;
-    for(let i = 0; i < userInput.length && i < currentText.length; i++) {
-      if(userInput[i] === currentText[i]) correctCount++;
+    for (let i = 0; i < userInput.length && i < currentText.length; i++) {
+      if (userInput[i] === currentText[i]) correctCount++;
     }
-    
+
     const elapsedMinutes = (60 - timeLeft) / 60;
     let standardWPM = 0;
-    if(elapsedMinutes > 0 && correctCount > 0) {
-      const wordsTyped = correctCount / 5; 
+    if (elapsedMinutes > 0 && correctCount > 0) {
+      const wordsTyped = correctCount / 5;
       standardWPM = Math.floor(wordsTyped / elapsedMinutes);
     }
-    
+
     const weightedWPM = calculateWeightedWPM(currentText, userInput);
     setWpm(Math.max(standardWPM, weightedWPM) || 0);
-    
-    if(userInput.length > 0) {
+
+    if (userInput.length > 0) {
       const acc = (correctCount / userInput.length) * 100;
       setAccuracy(Math.floor(acc));
     } else {
@@ -110,21 +110,21 @@ export default function TypingGame() {
   // End game and show results
   const endGame = () => {
     setIsActive(false);
-    
+
     let correct = 0;
-    for(let i = 0; i < userInput.length && i < currentText.length; i++) {
-      if(userInput[i] === currentText[i]) correct++;
+    for (let i = 0; i < userInput.length && i < currentText.length; i++) {
+      if (userInput[i] === currentText[i]) correct++;
     }
     const finalAccuracy = userInput.length > 0 ? (correct / userInput.length) * 100 : 0;
     const finalWPM = calculateWeightedWPM(currentText, userInput);
-    
+
     const originalWords = currentText.toLowerCase().split(/\s+/);
     const typedWords = userInput.toLowerCase().trim().split(/\s+/);
     let completedWords = 0;
-    for(let i = 0; i < originalWords.length; i++) {
-      if(typedWords[i] === originalWords[i]) completedWords++;
+    for (let i = 0; i < originalWords.length; i++) {
+      if (typedWords[i] === originalWords[i]) completedWords++;
     }
-    
+
     setFinalStats(`
       ✅ Typing Speed: ${finalWPM} WPM (weighted)
       📝 Accuracy: ${Math.floor(finalAccuracy)}%
@@ -132,8 +132,8 @@ export default function TypingGame() {
       ⌨️ Characters typed: ${userInput.length} / ${currentText.length}
     `);
     setShowResults(true);
-    
-    
+
+
     const testResult = {
       timestamp: Date.now(),
       wpm: finalWPM,
@@ -141,10 +141,10 @@ export default function TypingGame() {
       difficulty: difficulty,
       date: new Date().toLocaleString()
     };
-    
+
     try {
       const storedHistory = localStorage.getItem('typingHistory');
-      if(storedHistory) {
+      if (storedHistory) {
         const arr = JSON.parse(storedHistory);
         arr.push(testResult);
         localStorage.setItem('typingHistory', JSON.stringify(arr.slice(-5))); // Keep last 5 results
@@ -160,12 +160,12 @@ export default function TypingGame() {
 
   // Start the game
   const startGame = () => {
-    
+
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
-    
+
     loadText();
     setUserInput('');
     setTimeLeft(60);
@@ -173,14 +173,14 @@ export default function TypingGame() {
     setAccuracy(100);
     setIsActive(true);
     setShowResults(false);
-    
+
     // Focus on textarea
     setTimeout(() => {
       if (textareaRef.current) {
         textareaRef.current.focus();
       }
     }, 100);
-    
+
     // Start countdown timer
     timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {
@@ -195,12 +195,12 @@ export default function TypingGame() {
     }, 1000);
   };
 
-  
+
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (!isActive) return;
     const value = e.target.value;
     setUserInput(value);
-    
+
     // Auto-complete when user types all characters
     if (value.length >= currentText.length) {
       if (timerRef.current) clearInterval(timerRef.current);
@@ -209,10 +209,10 @@ export default function TypingGame() {
     }
   };
 
-  
+
   const renderHighlightedText = () => {
     if (!currentText) return null;
-    
+
     return currentText.split('').map((char, index) => {
       let className = 'char';
       if (index < userInput.length) {
@@ -229,7 +229,7 @@ export default function TypingGame() {
     });
   };
 
- useEffect(() => {
+  useEffect(() => {
     try {
       const storedHistory = localStorage.getItem('typingHistory');
       if (storedHistory) {
@@ -260,7 +260,7 @@ export default function TypingGame() {
     };
   }, []);
 
-  
+
   useEffect(() => {
     if (timeLeft === 0 && isActive) {
       endGame();
@@ -270,12 +270,12 @@ export default function TypingGame() {
   return (
     <div className="game-container">
       <h1>⚡ SPEED TYPING GAME ⚡</h1>
-      
+
       <div className="controls">
         <div className="difficulty-selector">
           <label>📊 Difficulty:</label>
-          <select 
-            value={difficulty} 
+          <select
+            value={difficulty}
             onChange={(e) => setDifficulty(e.target.value)}
             disabled={isActive}
           >
@@ -284,7 +284,7 @@ export default function TypingGame() {
             <option value="hard">🔥 Hard - Complex Text</option>
           </select>
         </div>
-        
+
         <div className="stats">
           <div className="stat">
             <div className="stat-value">{timeLeft}</div>
@@ -299,18 +299,18 @@ export default function TypingGame() {
             <div className="stat-label">Accuracy %</div>
           </div>
         </div>
-        
+
         <button onClick={startGame} disabled={isActive}>
-           START TEST
+          START TEST
         </button>
       </div>
-      
+
       <div className="text-display">
         <div className="reference-text">
           {renderHighlightedText()}
         </div>
       </div>
-      
+
       <div className="input-area">
         <textarea
           ref={textareaRef}
@@ -321,20 +321,20 @@ export default function TypingGame() {
           rows={5}
         />
       </div>
-      
+
       {showResults && (
         <div className="results">
           <h3>📊 Test Complete!</h3>
           <p style={{ whiteSpace: 'pre-line' }}>{finalStats}</p>
           <div className="accuracy-bar">
-            <div 
-              className="accuracy-fill" 
+            <div
+              className="accuracy-fill"
               style={{ width: `${accuracy}%` }}
             />
           </div>
           {history.length > 0 && (
             <div style={{ marginTop: '15px', fontSize: '12px', color: '#aaa' }}>
-              🏆 Last Score: {history[history.length-1]?.wpm} WPM | {history[history.length-1]?.accuracy}% Accuracy
+              🏆 Last Score: {history[history.length - 1]?.wpm} WPM | {history[history.length - 1]?.accuracy}% Accuracy
             </div>
           )}
         </div>
