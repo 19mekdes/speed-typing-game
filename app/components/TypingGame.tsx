@@ -160,7 +160,7 @@ export default function TypingGame() {
 
   // Start the game
   const startGame = () => {
-    // Clear existing timer
+    
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
@@ -260,7 +260,7 @@ export default function TypingGame() {
     };
   }, []);
 
-  // Auto-end game when time reaches 0
+  
   useEffect(() => {
     if (timeLeft === 0 && isActive) {
       endGame();
